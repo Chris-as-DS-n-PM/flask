@@ -144,7 +144,7 @@ buildings = {
     'TH' : 'University Theatre'
 }
 
-all_rooms = {room: buildings[room.split(' ')[0]] for room in df['Location'].unique()}.items()
+all_rooms = sorted({room: buildings[room.split(' ')[0]] for room in df['Location'].unique()}.items(), key=lambda i: i[0])
 
 days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
