@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+      * {
+        font-family: 'Open Sans', sans-serif;
+      }
+
+      .submit-button {
+        color: #008442; 
+        background-color: white; 
+        border: 2px solid #008442;
+      }
+
+      .submit-button:hover {
+        color: white;
+        background-color: #008442;
+      }
+    </style>
+
+  <title>UTD Rooms</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e26f1e;">
+  <a class="navbar-brand" href="#">
+    <img src="{{url_for('static',filename='app_logo.png')}}" width="40" height="40" alt="">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      
+	  <a class="nav-item nav-link active" href="/">Open Rooms<span class="sr-only">(current)</span></a>
+	  <a class="nav-item nav-link" href="/room_schedule">Rooms Schedule</a>
+	  
+      
+    </div>
+  </div>
+</nav>    
+
+  <div class='container'>
+
+
+
+  <br>
+  <button onclick="window.location.href='/'" class="btn submit-button">Search Again
+  </button>
+  <br>
+  <br>
+
+
+{% for room_group_key, room_group in data.items() %}
+<h1 class="display-4">{{room_group_key}}</h1>
+<p class="lead" style="color: #008442;">{{buildings[room_group_key]}}</p>
+
+  {% for room, time_ranges in room_group.items() %}
+  <dt>{{room}}</dt>
+
+    {% if time_ranges|length == 0 %}
+    <p class="lead" style="color: #000;">This room has no classes</p>
+    {% else %}
+    {% for time_range in time_ranges %}
+    <p class="lead" style="color: #000;">{{time_range}}</p>
+    {% endfor %}
+    {% endif %}
+    <hr>
+  {% endfor %}
+
+{% endfor %}
+
+</div>
+
+
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+</body>
+</html>
