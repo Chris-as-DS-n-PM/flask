@@ -1,9 +1,7 @@
-# README
+# UTD Rooms
+Utility tool to find open rooms and get schedules for a room
 
-This is the [Flask](http://flask.pocoo.org/) [quick start](http://flask.pocoo.org/docs/1.0/quickstart/#a-minimal-application) example for [Render](https://render.com).
+### How are open locations determined? 
+- I scraped data from UTD coursebook (a tool that shows information about class times, professor, and location). So, anytime there is NO lecture happening then the class is probably open. "Probably" because some rooms might be locked.
 
-The app in this repo is deployed at [https://flask.onrender.com](https://flask.onrender.com).
 
-## Deployment
-
-Follow the guide at https://render.com/docs/deploy-flask.
