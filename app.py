@@ -135,6 +135,7 @@ buildings = {
     'PHY' : 'Physics Building',
     'RHNW' : 'Residence Hall Northwest',
     'RHW' : 'Residence Hall West',
+    'RL': 'Natural Science and Engineering Research Lab',
     'ROC' : 'Research and Operations Center',
     'ROW' : 'Research and Operations Center West',
     'SCI' : 'Sciences Building',
