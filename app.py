@@ -106,7 +106,7 @@ def get_time_ranges_for_rooms(
 
 #---------------------
 # load in coursebook data
-df = pd.read_csv('./static/cleaned_23f.csv')
+df = pd.read_csv('./static/cleaned_24s.csv')
 preprocess_coursebook_data(df) 
 
 buildings = {
