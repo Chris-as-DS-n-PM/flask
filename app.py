@@ -15,3 +15,11 @@ def hello_world():
             cursor.execute(SELECT)
             average = cursor.fetchone()[0]
     return "Hello World " + str(average)
+
+@app.route('/vhvh')
+def vhvh():
+    with conn:
+        with conn.cursor() as cursor:
+            cursor.execute("""SELECT * FROM test WHERE nom = 'vhvh';""")
+            average = cursor.fetchone()[0]
+    return "Hello World " + str(average)
