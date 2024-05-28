@@ -1,8 +1,8 @@
 import os
 import psycopg2
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-load_dotenv()  # loads variables from .env file into environment
+#load_dotenv()  # loads variables from .env file into environment
 
 from flask import Flask
 app = Flask(__name__)
