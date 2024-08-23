@@ -106,7 +106,7 @@ def get_time_ranges_for_rooms(
 
 #---------------------
 # load in coursebook data
-df = pd.read_csv('./static/cleaned_24s.csv')
+df = pd.read_csv('./static/cleaned_24f.csv')
 preprocess_coursebook_data(df) 
 
 buildings = {
@@ -115,6 +115,7 @@ buildings = {
     'ATC' : 'Arts and Technology Building',
     'CB' : 'Classroom Building',
     'CBH' : 'Classroom Building',
+    'CCTC': 'CCTC',
     'CD1' : 'Callier Dallas Building',
     'CD2' : 'Callier Dallas Building',
     'CHEC' : 'Collin Higher Education Center',
