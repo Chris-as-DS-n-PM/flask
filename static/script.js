@@ -1,5 +1,5 @@
-//const BASE_URL = "http://192.168.1.8"
-//const BASE_URL = "http://127.0.0.1"
+//const BASE_URL = "http://192.168.1.8:5000"
+//const BASE_URL = "http://127.0.0.1:5000"
 const BASE_URL = "https://flask-hello-world-stb5.onrender.com"
 
 async function APIrequest(apiURL){
@@ -25,7 +25,7 @@ async function getSitesId() {
   }
 
   try {
-    sitesData = await APIrequest(BASE_URL + ":5000/sites"); // Appel de l'API
+    sitesData = await APIrequest(BASE_URL + "/sites"); // Appel de l'API
     return sitesData;
 
   } catch (error) {
@@ -35,7 +35,7 @@ async function getSitesId() {
 
 async function getSiteIdByName(siteName) {
   try {
-    const sites = await APIrequest(BASE_URL + ":5000/sites"); // Appel de l'API
+    const sites = await APIrequest(BASE_URL + "/sites"); // Appel de l'API
 
     if (sites && Array.isArray(sites)) { // Vérifie si les données sont un tableau
       const siteId = sites.find(site => site.name === siteName); // Trouve le site par son nom
@@ -75,7 +75,7 @@ async function getWorkers() {
   }
 
   try {
-    workersData = await APIrequest(BASE_URL + ":5000/workers"); // Appel de l'API
+    workersData = await APIrequest(BASE_URL + "/workers"); // Appel de l'API
 
     workersData.forEach((element) => {
       element.color = getRandomColor();
@@ -125,7 +125,7 @@ const modifierButton = document.getElementById('modifierButton');
 
 
 async function deleteReservation(workerId, siteId, date) {
-  const url = BASE_URL + ":5000/reservations";
+  const url = BASE_URL + "/reservations";
   
   const body = JSON.stringify({
     worker_id: workerId,
@@ -154,7 +154,7 @@ async function deleteReservation(workerId, siteId, date) {
 }
 
 async function createReservation(workerId, siteId, date) {
-  const url = BASE_URL + ":5000/reservations";
+  const url = BASE_URL + "/reservations";
   
   const body = JSON.stringify({
     worker_id: workerId,
@@ -487,7 +487,7 @@ const createWeek = () => {
       const workers = await getWorkers();
       
       // Faire l'appel API pour les réservations du site Paris
-      const reservationParis = await APIrequest(BASE_URL + ":5000/reservations/site/" + siteId + "/week?start_date=" + weekRectangle);
+      const reservationParis = await APIrequest(BASE_URL + "/reservations/site/" + siteId + "/week?start_date=" + weekRectangle);
             
       const circleCountByDate = {};
 
