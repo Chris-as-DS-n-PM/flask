@@ -11,7 +11,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def get_db_connection():
     conn = psycopg2.connect(
         host="dpg-csdbse08fa8c73907000-a.frankfurt-postgres.render.com",
-        port='5432'
+        port='5432',
         dbname="reservation_v1",
         user="reservation_v1_user",
         password="oUWvegfUufKjyT21WRWpaRocf4fE1IWT",
