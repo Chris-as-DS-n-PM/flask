@@ -557,9 +557,10 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-window.onload = async function () {
-  await createWeek();
-
+window.onload = function () {
   createWeek();
-  createWeek(); 
+  sleep(5000).then(() => {
+    createWeek();
+    createWeek(); 
+  });
 };
