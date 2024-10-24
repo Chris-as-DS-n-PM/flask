@@ -185,13 +185,20 @@ async function createReservation(workerId, siteId, date) {
 function handleClick() {
   if (isModiferState) {
     isReserved = this.querySelector("#Jean_Martin")
+
+    const sitesId = await getSitesId();
+    const siteId = sitesId.find(site => site.name === "Bureau Paris").id;
+
+    const workersId = await getSitesId();
+    const workerId = workersId.find(worker => worker.firstname === "Jean").id;
+    
     if (isReserved){
       this.style.backgroundColor = colorGray;
-      deleteReservation('9150db55-d294-4bb2-a78a-ef415cbf16fc', 'f09a4628-5b67-4445-a266-130177afaf98', this.id);
+      deleteReservation(workerId, siteId, this.id);
       isReserved.remove();
     }else{
       this.style.backgroundColor = colorGreen;
-      createReservation('9150db55-d294-4bb2-a78a-ef415cbf16fc', 'f09a4628-5b67-4445-a266-130177afaf98', this.id);
+      createReservation(workerId, siteId, this.id);
       const circle = document.createElement('div');
       circle.classList.add('circle'); // Ajoute la classe pour le style
 
