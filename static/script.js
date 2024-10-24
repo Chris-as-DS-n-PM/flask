@@ -559,7 +559,7 @@ function sleep(ms) {
 
 window.onload = function () {
   createWeek();
-  sleep(1500).then(() => {
+  sleep(5000).then(() => {
     createWeek();
     createWeek(); 
   });
