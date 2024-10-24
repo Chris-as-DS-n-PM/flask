@@ -186,11 +186,9 @@ function handleClick() {
   if (isModiferState) {
     isReserved = this.querySelector("#Jean_Martin")
 
-    const sitesId = await getSitesId();
-    const siteId = sitesId.find(site => site.name === "Bureau Paris").id;
+    const siteId = sitesData.find(site => site.name === "Bureau Paris").id;
 
-    const workersId = await getSitesId();
-    const workerId = workersId.find(worker => worker.firstname === "Jean").id;
+    const workerId = workersData.find(worker => worker.firstname === "Jean").id;
     
     if (isReserved){
       this.style.backgroundColor = colorGray;
