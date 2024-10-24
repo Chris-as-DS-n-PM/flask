@@ -188,15 +188,15 @@ function handleClick() {
 
     const siteId = sitesData.find(site => site.name === "Bureau Paris").id;
 
-    const workerId = workersData.find(worker => worker.firstname === "Jean").id;
+    const worker = workersData.find(worker => worker.firstname === "Jean");
     
     if (isReserved){
       this.style.backgroundColor = colorGray;
-      deleteReservation(workerId, siteId, this.id);
+      deleteReservation(worker.id, siteId, this.id);
       isReserved.remove();
     }else{
       this.style.backgroundColor = colorGreen;
-      createReservation(workerId, siteId, this.id);
+      createReservation(worker.id, siteId, this.id);
       const circle = document.createElement('div');
       circle.classList.add('circle'); // Ajoute la classe pour le style
 
@@ -210,7 +210,6 @@ function handleClick() {
 
       // Appliquer la position gauche (left) au cercle pour le décaler
       circle.style.left = `${leftPosition}px`;
-      const worker = workersData.find(worker => worker.id === "9150db55-d294-4bb2-a78a-ef415cbf16fc");
       circle.textContent = worker.firstname[0] + worker.lastname[0];
       circle.classList.add('circle-inner-border');
 
@@ -580,7 +579,7 @@ function sleep(ms) {
 
 window.onload = function () {
   createWeek();
-  sleep(200).then(() => {
+  sleep(500).then(() => {
     createWeek();
     createWeek(); 
   });
