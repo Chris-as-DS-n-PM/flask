@@ -33,25 +33,6 @@ async function getSitesId() {
   }
 }
 
-async function getSiteIdByName(siteName) {
-  try {
-    const sites = await APIrequest(BASE_URL + "/sites"); // Appel de l'API
-
-    if (sites && Array.isArray(sites)) { // Vérifie si les données sont un tableau
-      const siteId = sites.find(site => site.name === siteName); // Trouve le site par son nom
-
-      if (siteId) {
-        return siteId.id; // Retourne l'ID du site
-      } else {
-        console.log('Site ' + siteName + ' non trouvé.');
-      }
-    }
-
-  } catch (error) {
-    console.error('Erreur:', error); // Gestion des erreurs
-  }
-}
-
 function getRandomColor() {
   // Génère une teinte (Hue) entre 0 et 360 degrés
   const hue = Math.floor(Math.random() * 360);
@@ -548,7 +529,7 @@ const createWeek = () => {
       console.error('Erreur:', error); // Gestion des erreurs
     }
   }
-11
+
 
   fetchReservationsForParis();
 
@@ -579,7 +560,7 @@ function sleep(ms) {
 
 window.onload = function () {
   createWeek();
-  sleep(500).then(() => {
+  sleep(1000).then(() => {
     createWeek();
     createWeek(); 
   });
