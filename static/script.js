@@ -469,11 +469,10 @@ const createWeek = () => {
       const sitesId = await getSitesId();
       const siteId = sitesId.find(site => site.name === "Bureau Paris").id;
 
-      const workers = await getWorkers();
-      
-      // Faire l'appel API pour les réservations du site Paris
       const reservationParis = await APIrequest(BASE_URL + "/reservations/site/" + siteId + "/week?start_date=" + weekRectangle);
-            
+
+      const workers = await getWorkers();
+                  
       const circleCountByDate = {};
 
       reservationParis.forEach(reservation => {
@@ -560,7 +559,7 @@ function sleep(ms) {
 
 window.onload = function () {
   createWeek();
-  sleep(1000).then(() => {
+  sleep(1500).then(() => {
     createWeek();
     createWeek(); 
   });
