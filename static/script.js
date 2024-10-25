@@ -16,6 +16,8 @@ async function APIrequest(apiURL){
   }
 }
 
+let switchSiteSelected = "Bureau Paris";
+
 let sitesData = null;
 
 async function getSitesId() {
@@ -93,6 +95,22 @@ document.addEventListener('DOMContentLoaded', function() {
       const targetLeft = this.getAttribute('data-target'); // Valeur "left" à partir de l'attribut data-target
       animation.style.left = targetLeft + 'px';
       animation.style.width = this.offsetWidth - 6 + 'px'; // Largeur de l'élément sélectionné (enlever les marges)
+
+      document.querySelectorAll('.main').forEach(e => e.remove());
+
+      currentWeek = 0;
+      dayRectangle = new Date();
+      dayRectangle.setDate(dayRectangle.getDate()-7);
+
+      if (switchSiteSelected === "Bureau Paris"){
+        switchSiteSelected = "Bureau Lyon";
+      }else{
+        switchSiteSelected = "Bureau Paris";
+      }
+
+      createWeek();
+      createWeek();
+      createWeek();       
     });
   });
 });
@@ -165,7 +183,7 @@ async function createReservation(workerId, siteId, date) {
 
 function handleClick() {
   if (isModiferState) {
-    isReserved = this.querySelector("#Jean_Martin")
+    isReserved = this.querySelector("#Jean_Martin");
 
     const siteId = sitesData.find(site => site.name === "Bureau Paris").id;
 
@@ -467,7 +485,7 @@ const createWeek = () => {
       // Récupérer l'ID du site pour "Bureau Paris"
 
       const sitesId = await getSitesId();
-      const siteId = sitesId.find(site => site.name === "Bureau Paris").id;
+      const siteId = sitesId.find(site => site.name === switchSiteSelected).id;
 
       const reservationParis = await APIrequest(BASE_URL + "/reservations/site/" + siteId + "/week?start_date=" + weekRectangle);
 
