@@ -113,6 +113,7 @@ buildings = {
     'AD' : 'Administration Building',
     'AH2': 'Arts and Humanities 2',
     'ATC' : 'Arts and Technology Building',
+    'APC1' : 'APC1',
     'CB' : 'Classroom Building',
     'CBH' : 'Classroom Building',
     'CCTC': 'CCTC',
