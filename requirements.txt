@@ -1,2 +1,6 @@
-Flask
-Gunicorn
+Flask==3.0.3
+flask-cors==4.0.*
+requests
+scikit-learn==1.6.*
+numpy==2.2.*
+rosu-pp-py==3.0.*
