@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show2TV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Show2TV!</h1>
+    {% for category, channels in categories.items() %}
+        <h2>{{ category }}</h2>
+        <ul>
+            {% for channel in channels %}
+                <li><a href="/watch/{{ channel.lower() }}">{{ channel }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>

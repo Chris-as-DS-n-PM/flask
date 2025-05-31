@@ -1,0 +1,55 @@
+body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif;
+    margin: 20px;
+    background-color: #f0f8ff; /* AliceBlue */
+}
+
+h1, h2 {
+    color: #ff6347; /* Tomato */
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+h2 {
+    border-bottom: 2px solid #ffb6c1; /* LightPink */
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li a {
+    text-decoration: none;
+    color: #1e90ff; /* DodgerBlue */
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+li a:hover {
+    color: #ff69b4; /* HotPink */
+}
+
+p a {
+     display: inline-block;
+     margin-top: 20px;
+     padding: 10px 15px;
+     background-color: #32cd32; /* LimeGreen */
+     color: white;
+     text-decoration: none;
+     border-radius: 5px;
+     font-size: 1.1em;
+}
+
+p a:hover {
+    background-color: #228b22; /* ForestGreen */
+}
