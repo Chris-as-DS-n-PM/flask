@@ -32,7 +32,7 @@ def home():
 @app.route("/protected_area")
 @login_is_required
 def protected_area():
-    return "Welcome to the protected area."
+    return render_template("protected_area.html", email=session["google_id"])
 
 if __name__ == "__main__": # Run the app
     app.run(debug=True)
