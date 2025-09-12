@@ -23,7 +23,7 @@ def callback():
 
 @app.route("/logout") # Logout route
 def logout():
-    return render_template("logout.html")
+    return redirect("/")
 
 @app.route("/") # Home route
 def home():
