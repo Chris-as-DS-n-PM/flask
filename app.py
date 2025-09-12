@@ -1,10 +1,16 @@
-from flask import Flask
+from flask import Flask, render_template, session, abort 
 app = Flask("Studsight")
 app.secret_key = "davidneastudsightkey.com"
 
-@app.route('/')
-def hello_world():
-    return 'Welcome to studsight!'
+def login_is_required(function):
+    def wrapper(*args, **kwargs):
+        if "google_id" not in session:
+            abort(401) # Authorisation required
+        else:
+            return function()
+        
+    return wrapper
+
 
 @app.route("/login") # Login route
 def login():
@@ -20,9 +26,10 @@ def logout():
 
 @app.route("/") # Home route
 def index():
-    return render_template("index.html")
+    return "hi there...." 
 
-@app.route("/protected_area") 
+@app.route("/protected_area")
+@login_is_required
 def protected_area():
     pass
 
