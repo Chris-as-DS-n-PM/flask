@@ -26,7 +26,7 @@ def logout():
 
 @app.route("/") # Home route
 def index():
-    return "hi there...." 
+    return "hi." 
 
 @app.route("/protected_area")
 @login_is_required
