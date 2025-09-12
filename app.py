@@ -15,7 +15,7 @@ def login_is_required(function):
 @app.route("/login") # Login route
 def login():
     session["google_id"] = "example_google_id"
-    return redirect(url_for("protected_area"))
+    return redirect("/protected_area")
 
 @app.route("/callback") # Callback route
 def callback():
