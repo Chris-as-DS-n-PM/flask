@@ -25,8 +25,8 @@ def logout():
     pass
 
 @app.route("/") # Home route
-def index():
-    return "me." 
+def home():
+    return render_template("home.html")
 
 @app.route("/protected_area")
 @login_is_required

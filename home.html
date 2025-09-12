@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudSight - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 1.5rem;
+            color: #2d3a4b;
+        }
+        .signin-btn {
+            background: #4f8cff;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .signin-btn:hover {
+            background: #376fd0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to StudSight</h1>
+        <button class="signin-btn" onclick="window.location.href='signin.html'">Sign In</button>
+    </div>
+</body>
+</html>
