@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, abort 
+from flask import Flask, render_template, session, abort, redirect, url_for
 app = Flask("Studsight")
 app.secret_key = "davidneastudsightkey.com"
 
@@ -14,7 +14,8 @@ def login_is_required(function):
 
 @app.route("/login") # Login route
 def login():
-    pass
+    session["google_id"] = "example_google_id"
+    return redirect(url_for("protected_area"))
 
 @app.route("/callback") # Callback route
 def callback():
@@ -31,7 +32,7 @@ def home():
 @app.route("/protected_area")
 @login_is_required
 def protected_area():
-    pass
+    return "Welcome to the protected area."
 
 if __name__ == "__main__": # Run the app
     app.run(debug=True)
