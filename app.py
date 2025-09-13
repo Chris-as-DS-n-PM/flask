@@ -4,6 +4,7 @@ from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
+import requests
 
 app = Flask("Studsight")
 app.secret_key = "davidneastudsightkey.com"
@@ -41,24 +42,44 @@ def login():
     return redirect(authorization_url)
 
 
-@app.route("/callback") # Callback route
+# @app.route("/callback") # Callback route
+# def callback():
+#     flow.fetch_token(authorization_response=request.url)
+
+#     if not  session["state"] == request.args["state"]:
+#         abort(500)  # State does  not match!
+
+#     credentials = flow.credentials
+#     request_session = request.session()
+#     cached_session = cachecontrol.CacheControl(request_session)
+#     token_request = google.auth.transport.requests.Request(session=cached_session)
+
+#     id_info = id_token.verify_oauth2_token(
+#         id_token=credentials._id_token,
+#         request=token_request,
+#         audience=GOOGLE_CLIENT_ID
+#     )
+#     return id_info
+
+
+
+@app.route("/callback")
 def callback():
     flow.fetch_token(authorization_response=request.url)
-
-    if not  session["state"] == request.args["state"]:
-        abort(500)  # State does  not match!
-
+    if not session["state"] == request.args["state"]:
+        abort(500)
     credentials = flow.credentials
-    request_session = request.session()
+    request_session = requests.session()
     cached_session = cachecontrol.CacheControl(request_session)
     token_request = google.auth.transport.requests.Request(session=cached_session)
-
     id_info = id_token.verify_oauth2_token(
         id_token=credentials._id_token,
         request=token_request,
         audience=GOOGLE_CLIENT_ID
     )
-    return id_info
+    session["google_id"] = id_info.get("sub")
+    session["email"] = id_info.get("email")
+    return redirect("/protected_area")
 
 
 @app.route("/logout") # Logout route
