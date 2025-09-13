@@ -19,10 +19,11 @@ def login():
 
 @app.route("/callback") # Callback route
 def callback():
-    pass#
+    return "call"
 
 @app.route("/logout") # Logout route
 def logout():
+    session.clear()
     return redirect("/")
 
 @app.route("/") # Home route
