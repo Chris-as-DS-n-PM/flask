@@ -19,7 +19,7 @@ def login():
 
 @app.route("/callback") # Callback route
 def callback():
-    return "call"
+    pass
 
 @app.route("/logout") # Logout route
 def logout():
