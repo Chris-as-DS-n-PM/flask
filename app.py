@@ -1,12 +1,16 @@
-from flask import Flask, render_template, session, abort, redirect, url_for
+from flask import Flask, render_template, session, abort, redirect, url_for, request
 import pathlib,os
+from googl.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
+from pip._vendor import cachecontrol
+import google.auth.transport.requests
 
 app = Flask("Studsight")
 app.secret_key = "davidneastudsightkey.com"
+
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
-
-
 GOOGLE_CLIENT_ID = "771970138692-gjilmd2o08eitr81o07oiuhfe7m5ardh.apps.googleusercontent.com"
 
 # Example initialization (update with your actual client secrets file and scopes)
@@ -39,7 +43,22 @@ def login():
 
 @app.route("/callback") # Callback route
 def callback():
-    pass
+    flow.fetch_token(authorization_response=request.url)
+
+    if not  session["state"] == request.args["state"]:
+        abort(500)  # State does  not match!
+
+    credentials = flow.credentials
+    request_session = request.session()
+    cached_session = cachecontrol.CacheControl(request_session)
+    token_request = google.auth.transport.requests.Request(session=cached_session)
+
+    id_info = id_token.verify_oauth2_token(
+        id_token=credentials._id_token,
+        request=token_request,
+        audience=GOOGLE_CLIENT_ID
+    )
+    return id_info
 
 
 @app.route("/logout") # Logout route
