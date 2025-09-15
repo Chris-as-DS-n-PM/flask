@@ -14,6 +14,8 @@
             align-items: center;
             justify-content: center;
         }
+        
+        
         .container {
             background-image: linear-gradient(to top, #EF3B36, #FFFFFF);
             padding: 2.5rem 3.5rem;
@@ -23,6 +25,12 @@
             position: relative;
             z-index: 2;
         }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
         h1 {
             margin-bottom: 1.2rem;
             color: #2d3a4b;
@@ -114,7 +122,7 @@
     <div class="container">
         <img class="hero-img" src="https://img.icons8.com/color/344/classroom.png" alt="Classroom graphic" />
         <h1>Welcome to StudSight</h1>
-        <div class="subtitle">Encouraging teacher collaboration to help Students' lear.<br>Collaboration & Insight for Modern Classrooms.</div>
+        <div class="subtitle">Encouraging teacher collaboration to help Students' learn.<br>Collaboration & Insight for Modern Classrooms.</div>
         <button class="signin-btn" onclick="window.location.href='{{ url_for('login') }}'">Sign In</button>
         <div class="features">
             <div class="feature-card">
