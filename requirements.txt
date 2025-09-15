@@ -1,5 +1,6 @@
 Flask
 Gunicorn
+google-auth-oauthlib
 anyio==4.9.0
 argon2-cffi==25.1.0
 argon2-cffi-bindings==21.2.0
