@@ -22,10 +22,7 @@ flow = Flow.from_client_secrets_file(
     scopes=[
         "https://www.googleapis.com/auth/userinfo.profile",
         "https://www.googleapis.com/auth/userinfo.email",
-        "openid",
-        "https://www.googleapis.com/auth/user.phonenumbers.read",
-        "https://www.googleapis.com/auth/user.gender.read",
-        "https://www.googleapis.com/auth/user.birthday.read"
+        "openid"
     ],
     redirect_uri="https://nea-studsight.onrender.com/callback"
     
