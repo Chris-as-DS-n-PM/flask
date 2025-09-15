@@ -59,7 +59,19 @@ def callback():
         audience=GOOGLE_CLIENT_ID
     )
 
-    return id_info
+    # Optionally, store info in session for later use
+    session["google_id"] = id_info.get("sub")
+    session["email"] = id_info.get("email")
+    # Return account info as JSON for direct feedback
+    from flask import jsonify
+    return jsonify({
+        "id": id_info.get("sub"),
+        "email": id_info.get("email"),
+        "name": id_info.get("name"),
+        "picture": id_info.get("picture"),
+        "locale": id_info.get("locale"),
+        "hd": id_info.get("hd")
+    })
 
 
 
