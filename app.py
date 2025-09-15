@@ -19,7 +19,14 @@ GOOGLE_CLIENT_ID = "771970138692-gjilmd2o08eitr81o07oiuhfe7m5ardh.apps.googleuse
 # Example initialization (update with your actual client secrets file and scopes)
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
-    scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+    scopes=[
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "openid",
+        "https://www.googleapis.com/auth/user.phonenumbers.read",
+        "https://www.googleapis.com/auth/user.gender.read",
+        "https://www.googleapis.com/auth/user.birthday.read"
+    ],
     redirect_uri="https://nea-studsight.onrender.com/callback"
     
     )
@@ -70,7 +77,10 @@ def callback():
         "name": id_info.get("name"),
         "picture": id_info.get("picture"),
         "locale": id_info.get("locale"),
-        "hd": id_info.get("hd")
+        "hd": id_info.get("hd"),
+        "phone_number": id_info.get("phone_number"),
+        "gender": id_info.get("gender"),
+        "birthday": id_info.get("birthday")
     })
 
 
