@@ -5,45 +5,134 @@
     <title>StudSight - Home</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f6fb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f4f6fb 100%);
+            min-height: 100vh;
+            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
         }
         .container {
-            background: #fff;
-            padding: 2rem 3rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.95);
+            padding: 2.5rem 3.5rem;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(79,140,255,0.10), 0 1.5px 6px rgba(0,0,0,0.06);
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
         h1 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             color: #2d3a4b;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            color: #4f8cff;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
         }
         .signin-btn {
-            background: #4f8cff;
+            background: linear-gradient(90deg, #4f8cff 60%, #6ee7b7 100%);
             color: #fff;
             border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 5px;
-            font-size: 1rem;
+            padding: 0.9rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+            transition: background 0.2s, transform 0.2s;
         }
         .signin-btn:hover {
-            background: #376fd0;
+            background: linear-gradient(90deg, #376fd0 60%, #34d399 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+        .hero-img {
+            width: 220px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 16px rgba(79,140,255,0.12));
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        .feature-card {
+            background: #f0f7ff;
+            border-radius: 12px;
+            box-shadow: 0 1px 4px rgba(79,140,255,0.07);
+            padding: 1.2rem 1.5rem;
+            width: 220px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .feature-card:hover {
+            box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.7rem;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.2rem 0.5rem;
+            }
+            .features {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .feature-card {
+                width: 100%;
+            }
+        }
+        .background-svg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
+    <svg class="background-svg" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="1200" cy="200" r="180" fill="#4f8cff" fill-opacity="0.12"/>
+        <circle cx="300" cy="700" r="160" fill="#6ee7b7" fill-opacity="0.13"/>
+        <ellipse cx="900" cy="800" rx="220" ry="80" fill="#4f8cff" fill-opacity="0.08"/>
+    </svg>
     <div class="container">
+        <img class="hero-img" src="https://img.icons8.com/color/344/classroom.png" alt="Classroom graphic" />
         <h1>Welcome to StudSight</h1>
+        <div class="subtitle">Encouraging teacher collaboration to help Students' learning.<br>Collaboration & Insight for Modern Classrooms.</div>
         <button class="signin-btn" onclick="window.location.href='{{ url_for('login') }}'">Sign In</button>
+        <div class="features">
+            <div class="feature-card">
+                <span class="feature-icon">👩‍🏫</span>
+                <strong>Teacher Collaboration</strong>
+                <div>Share resources, strategies, and feedback with fellow educators.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <strong>Student Insights</strong>
+                <div>Track student progress and identify learning trends with ease.</div>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔒</span>
+                <strong>Secure & Private</strong>
+                <div>All data is protected with top-tier security and privacy standards.</div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
