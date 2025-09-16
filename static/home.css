@@ -10,6 +10,13 @@ body {
     box-sizing: border-box;
 }
 
+.main-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
 
 .container {
     background-image: linear-gradient(to top, #EF3B36, #FFFFFF);
