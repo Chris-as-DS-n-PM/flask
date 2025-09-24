@@ -7,16 +7,11 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import requests
 
-
 app = Flask("Studsight") # Initialize Flask app 
 app.secret_key = "davidneastudsightkey.com" # Secret key for session management 
 
-
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json") # Path to client secrets file
 GOOGLE_CLIENT_ID = "771970138692-gjilmd2o08eitr81o07oiuhfe7m5ardh.apps.googleusercontent.com" # Your Google Client ID for OAuth 2.0
-
-
-
 
 # Example initialization (update with your actual client secrets file and scopes)
 #links to the google oauth 2.0 server for authentication
@@ -32,8 +27,6 @@ flow = Flow.from_client_secrets_file(
     )
 
 
-
-
 # Decorator to check if user is logged in before accessing certain routes
 def login_is_required(function):
     def wrapper(*args, **kwargs):
@@ -45,19 +38,11 @@ def login_is_required(function):
         
     return wrapper
 
-
-
-
-
-
 @app.route("/login") # Login route
 def login():
     authorization_url, state = flow.authorization_url() # Get authorization URL and state reply from Google
     session["state"] = state
     return redirect(authorization_url)
-
-
-
 
 
 # @app.route("/callback") # Callback route
@@ -81,8 +66,6 @@ def login():
 
 
 
-
-
 @app.route("/callback") # Callback route to handle Google's response
 def callback():
     flow.fetch_token(authorization_response=request.url)
@@ -102,25 +85,15 @@ def callback():
     return redirect("/protected_area")
 
 
-
-
-
 @app.route("/logout") # Logout route to clear session
 def logout():
     session.clear()
     return redirect("/")
 
 
-
-
-
 @app.route("/") # Home route, which is the landing page when the app is accessed
 def home():
     return render_template("home.html")
-
-
-
-
 
 # Protected area route, accessible only after login.
 @app.route("/protected_area") #This is where the people who have access to the app will go after logging in to view the app's main content.
