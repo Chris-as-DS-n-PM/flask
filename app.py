@@ -88,6 +88,9 @@ def callback():
     session["email"] = id_info.get("email")
     return redirect("/protected_area")
 
+@app.route('/autho')
+def autho():
+    return redirect("/protected_area")
 
 @app.route("/logout") # Logout route to clear session
 def logout():
