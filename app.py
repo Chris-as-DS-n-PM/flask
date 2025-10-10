@@ -1,4 +1,4 @@
-# IMPOPRTS
+
 from flask import Flask, render_template, session, abort, redirect, url_for, request
 import pathlib,os
 from google.oauth2 import id_token
@@ -7,14 +7,16 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import requests
 
-app = Flask("Studsight") # Initialize Flask app 
-app.secret_key = "davidneastudsightkey.com" # Secret key for session management 
 
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json") # Path to client secrets file
-GOOGLE_CLIENT_ID = "771970138692-gjilmd2o08eitr81o07oiuhfe7m5ardh.apps.googleusercontent.com" # Your Google Client ID for OAuth 2.0
+app = Flask("Studsight")
+app.secret_key = "davidneastudsightkey.com"
+
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+GOOGLE_CLIENT_ID = "771970138692-gjilmd2o08eitr81o07oiuhfe7m5ardh.apps.googleusercontent.com"
 
 # Example initialization (update with your actual client secrets file and scopes)
-#links to the google oauth 2.0 server for authentication
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=[
@@ -22,25 +24,26 @@ flow = Flow.from_client_secrets_file(
         "https://www.googleapis.com/auth/userinfo.email",
         "openid"
     ],
-    redirect_uri="https://nea-studsight.onrender.com/callback" # Your redirect URI once authentication is complete
+    redirect_uri="https://nea-studsight.onrender.com/callback"
     
     )
 
 
-# Decorator to check if user is logged in before accessing certain routes
 def login_is_required(function):
     def wrapper(*args, **kwargs):
-
         if "google_id" not in session:
-            abort(401)          # Authorisation required
+            abort(401) # Authorisation required
         else:
-            return function()   # Call the original function
+            return function()
         
     return wrapper
 
+
+
+
 @app.route("/login") # Login route
 def login():
-    authorization_url, state = flow.authorization_url() # Get authorization URL and state reply from Google
+    authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
 
@@ -66,7 +69,7 @@ def login():
 
 
 
-@app.route("/callback") # Callback route to handle Google's response
+@app.route("/callback")
 def callback():
     flow.fetch_token(authorization_response=request.url)
     if not session["state"] == request.args["state"]:
@@ -85,18 +88,18 @@ def callback():
     return redirect("/protected_area")
 
 
-@app.route("/logout") # Logout route to clear session
+@app.route("/logout") # Logout route
 def logout():
     session.clear()
     return redirect("/")
 
 
-@app.route("/") # Home route, which is the landing page when the app is accessed
+@app.route("/") # Home route
 def home():
     return render_template("home.html")
 
-# Protected area route, accessible only after login.
-@app.route("/protected_area") #This is where the people who have access to the app will go after logging in to view the app's main content.
+
+@app.route("/protected_area")
 @login_is_required
 def protected_area():
     return render_template("protected_area.html", email=session["google_id"])
