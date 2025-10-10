@@ -39,15 +39,21 @@ h1 {
 .subtitle {
     color: #2255b3;
     font-size: 1.2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 .signin-btn {
     background: linear-gradient(90deg, #4f8cff 60%, #6ee7b7 100%);
     color: #fff;
+    position: relative;
+    left: 80%;
+    align-items: right;
+    size: max-content;
+    height: 5vw;
+    width: 15vw;
     border: none;
     padding: 0.9rem 2.5rem;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 2rem;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(79,140,255,0.10);
@@ -59,10 +65,23 @@ h1 {
 }
 .hero-img {
     width: max-content;
-    max-width: 40vw;
-    margin-bottom: 1.5rem;
+    max-width: 80vw;
+    left: 75%;
+    position: relative;
+    align-self: right;
+    margin-bottom: 0rem;
     filter: drop-shadow(0 4px 16px rgba(79,140,255,0.12));
 }
+
+.hero {
+    position: relative;
+    bottom: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    text-align: right;
+}
+
 .features {
     display: flex;
     flex-wrap: wrap;
