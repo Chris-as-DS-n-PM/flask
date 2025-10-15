@@ -49,27 +49,6 @@ def login():
     return redirect(authorization_url)
 
 
-# @app.route("/callback") # Callback route
-# def callback():
-#     flow.fetch_token(authorization_response=request.url)
-
-#     if not  session["state"] == request.args["state"]:
-#         abort(500)  # State does  not match!
-
-#     credentials = flow.credentials
-#     request_session = request.session()
-#     cached_session = cachecontrol.CacheControl(request_session)
-#     token_request = google.auth.transport.requests.Request(session=cached_session)
-
-#     id_info = id_token.verify_oauth2_token(
-#         id_token=credentials._id_token,
-#         request=token_request,
-#         audience=GOOGLE_CLIENT_ID
-#     )
-#     return id_info
-
-
-
 @app.route("/callback")  # Callback route to handle Google's response 
 def callback():
     flow.fetch_token(authorization_response=request.url)
