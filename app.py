@@ -54,4 +54,4 @@ print(df_transactions.head())
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return df_transactions.head()
