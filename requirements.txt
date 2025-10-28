@@ -1,2 +1,11 @@
 Flask
 Gunicorn
+pandas
+numpy
+matplotlib.pyplot
+seaborn
+datetime
+sklearn.cluster
+sklearn.preprocessing
+sklearn.metrics
+warnings
