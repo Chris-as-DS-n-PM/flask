@@ -5,7 +5,5 @@ pandas
 numpy
 seaborn
 datetime
-sklearn.cluster
-sklearn.preprocessing
-sklearn.metrics
+scikit-learn
 warnings
