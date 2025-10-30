@@ -1,57 +1,33 @@
-from flask import Flask
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from datetime import datetime, timedelta
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import silhouette_score
-import warnings
-warnings.filterwarnings('ignore')
-
-# Configuration des graphiques
-plt.style.use('default')
-sns.set_palette("husl")
-
+# app_flask.py
+from flask import Flask, render_template, request
+import requests
 
 app = Flask(__name__)
 
+FASTAPI_URL = "https://fastapi-3qc2.onrender.com/predict"
 
-# Date de référence pour le calcul de la récence
-reference_date = datetime(2024, 1, 1)
+@app.route("/")
+def index():
+    return render_template("form.html")
 
-# Génération de données de transactions
-np.random.seed(42)
-n_customers = 1000
-n_transactions = 5000
+@app.route("/predict", methods=["POST"])
+def predict():
+    # Récupérer les données du formulaire HTML
+    sepal_length = float(request.form["sepal_length"])
+    sepal_width = float(request.form["sepal_width"])
+    petal_length = float(request.form["petal_length"])
+    petal_width = float(request.form["petal_width"])
 
-# Génération des données clients
-customer_ids = np.random.randint(1, n_customers + 1, n_transactions)
-transaction_dates = pd.date_range(
-    start=datetime(2022, 1, 1),
-    end=datetime(2023, 12, 31),
-    freq='D'
-)
-transaction_dates = np.random.choice(transaction_dates, n_transactions)
+    # Envoyer les données à l’API FastAPI
+    payload = {
+        "sepal_length": sepal_length,
+        "sepal_width": sepal_width,
+        "petal_length": petal_length,
+        "petal_width": petal_width
+    }
 
-# Montants des transactions (distribution log-normale)
-amounts = np.random.lognormal(mean=3, sigma=1, size=n_transactions)
+    response = requests.post(FASTAPI_URL, json=payload)
+    prediction = response.json().get("prediction", "Erreur")
 
-# Création du DataFrame
-df_transactions = pd.DataFrame({
-    'customer_id': customer_ids,
-    'transaction_date': transaction_dates,
-    'amount': amounts
-})
-
-print(f"Dataset généré: {len(df_transactions)} transactions pour {len(df_transactions['customer_id'].unique())} clients")
-print(f"Période: {df_transactions['transaction_date'].min()} à {df_transactions['transaction_date'].max()}")
-print(f"Montant moyen: {df_transactions['amount'].mean():.2f}€")
-print("\nAperçu des données:")
-print(df_transactions.head())
-
-
-@app.route('/')
-def hello_world():
-    return df_transactions.head()
+    # Afficher le résultat sur la page
+    return render_template("result.html", prediction=prediction)
