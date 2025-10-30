@@ -31,3 +31,9 @@ def predict():
 
     # Afficher le résultat sur la page
     return render_template("result.html", prediction=prediction)
+
+
+@app.route("/moncv", methods=["POST"])
+def moncv():
+    # Récupérer les données du formulaire HTML
+    
