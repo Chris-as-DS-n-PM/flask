@@ -1,7 +1,4 @@
 Flask
-Gunicorn
+requests
 pandas
 numpy
-seaborn
-datetime
-scikit-learn
