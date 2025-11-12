@@ -35,5 +35,5 @@ def predict():
 
 @app.route("/moncv", methods=["POST"])
 def moncv():
-    # Récupérer les données du formulaire HTML
+    return "test cv"
     
