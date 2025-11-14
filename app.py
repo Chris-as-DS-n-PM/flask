@@ -1,6 +1,8 @@
 # app_flask.py
 from flask import Flask, render_template, request
 import requests
+from config import Config
+from models import db, Book
 
 app = Flask(__name__)
 
@@ -36,4 +38,6 @@ def predict():
 @app.route("/moncv", methods=["POST"])
 def moncv():
     return "test cv"
+
+
     
