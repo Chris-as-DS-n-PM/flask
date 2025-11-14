@@ -39,20 +39,13 @@ def predict():
     return render_template("result.html", prediction=prediction)
 
 
-@app.route("/moncv", methods=["POST"])
-def moncv():
-    return "test cv"
-
-
 def get_connection():
     url = os.getenv("DATABASE_URL")
 
     # Render fournit parfois `postgres://` → psycopg2 accepte les deux
     return psycopg2.connect(url, cursor_factory=RealDictCursor)
 
-
-
-
+@app.route("/init")
 def init_db():
     conn = get_connection()
     cur = conn.cursor()
@@ -68,3 +61,15 @@ def init_db():
     conn.commit()
     cur.close()
     conn.close()
+
+
+# ------- READ -------
+@app.route("/read")
+def index():
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM books ORDER BY id;")
+    books = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template("index.html", books=books)
