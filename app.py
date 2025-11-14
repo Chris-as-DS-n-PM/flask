@@ -3,6 +3,10 @@ from flask import Flask, render_template, request
 import requests
 from config import Config
 from models import db, Book
+from db import get_connection
+import os
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
@@ -40,4 +44,27 @@ def moncv():
     return "test cv"
 
 
-    
+def get_connection():
+    url = os.getenv("DATABASE_URL")
+
+    # Render fournit parfois `postgres://` → psycopg2 accepte les deux
+    return psycopg2.connect(url, cursor_factory=RealDictCursor)
+
+
+
+
+def init_db():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS books (
+            id SERIAL PRIMARY KEY,
+            title VARCHAR(200) NOT NULL,
+            author VARCHAR(200) NOT NULL
+        );
+    """)
+
+    conn.commit()
+    cur.close()
+    conn.close()
