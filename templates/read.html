@@ -1,0 +1,21 @@
+<!-- templates/insert.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Read</title>
+  <style>
+    body { font-family: Arial; background: #eef; margin: 50px; text-align: center; }
+    .connexion { background: white; display: inline-block; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <div class="connexion">
+    <h2>Résultat lecture</h2>
+    {% for row in data %}
+      <p>Name: <strong>{{ row[0] }}</strong></p>
+    {% endfor %}
+    <a href="/">⬅️ Revenir au formulaire</a>
+  </div>
+</body>
+</html>
