@@ -38,9 +38,8 @@ def predict():
 
 def get_connection():
     url = os.getenv("DATABASE_URL")
-
     # Render fournit parfois `postgres://` → psycopg2 accepte les deux
-    return psycopg2.connect(url, cursor_factory=RealDictCursor)
+    return psycopg2.connect(url)
 
 @app.route("/init")
 def init():
