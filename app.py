@@ -45,5 +45,4 @@ def get_connection():
 @app.route("/init")
 def init():
     conn = get_connection()
-    cur = conn.cursor()
-    return render_template("init.html")
+    return render_template("init.html", conn=conn)
