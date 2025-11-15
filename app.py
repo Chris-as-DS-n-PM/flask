@@ -37,8 +37,11 @@ def predict():
 
 
 def get_connection():
-    url = os.getenv("DATABASE_URL")
-    return psycopg2.connect(url)
+    conn = psycopg2.connect(database="postgresql_test_cttl",
+                            user="postgresql_test_cttl_user",
+                            password="wKgWpaJ25ENGcxN70T4KQ8EOuuiwdHti",
+                            host="dpg-d3ucjhogjchc73a80ksg-a")
+    return conn
 
 @app.route("/init")
 def init():
