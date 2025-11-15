@@ -43,6 +43,7 @@ def get_connection():
                             host="dpg-d3ucjhogjchc73a80ksg-a")
     return conn
 
+# ------- Creation-------
 @app.route("/init")
 def init():
     conn = get_connection()
@@ -58,3 +59,19 @@ def init():
     conn.close()
     conn = "done"
     return render_template("init.html", conn=conn)
+
+
+# ------- INSERT-------
+@app.route("/insert")
+def insert():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute(
+    '''INSERT INTO users (name) VALUES \
+    ('chris'), ('Steph'), ('Bernard');''')
+    
+    cur.close()
+    conn.close()
+    result = "done"
+    return render_template("insert.html", result=result)
