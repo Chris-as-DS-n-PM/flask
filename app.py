@@ -49,7 +49,7 @@ def init():
     conn = get_connection()
     cur = conn.cursor()
     try:
-       cur.execute("""
+        cur.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             name VARCHAR(200) NOT NULL
@@ -69,7 +69,7 @@ def insert():
     cur = conn.cursor()
 
     try:
-       cur.execute(
+        cur.execute(
         '''INSERT INTO users (name) VALUES \
         ('chris'), ('Steph'), ('Bernard');''')
         conn.commit()
