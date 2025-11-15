@@ -37,10 +37,12 @@ def predict():
 
 
 def get_connection():
-    url = os.getenv("DATABASE_URL")
-    # Render fournit parfois `postgres://` → psycopg2 accepte les deux
-    return psycopg2.connect(url)
-
+    try:
+        url = os.getenv("DATABASE_URL")
+        return psycopg2.connect(url)
+    except ValueError:
+        return "erreur connexion"
+    
 @app.route("/init")
 def init():
     conn = get_connection()
