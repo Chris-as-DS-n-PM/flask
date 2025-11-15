@@ -6,4 +6,5 @@ numpy
 psycopg2-binary
 config
 wheel
+BasePage
 models
