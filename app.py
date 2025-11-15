@@ -2,7 +2,6 @@
 from flask import Flask, render_template, request
 import requests
 from config import Config
-from models import db, Book
 from db import get_connection
 import os
 import psycopg2
