@@ -45,8 +45,7 @@ def get_connection():
     return psycopg2.connect(url, cursor_factory=RealDictCursor)
 
 @app.route("/init")
-def init_db():
+def init():
     conn = get_connection()
     cur = conn.cursor()
-    print(conn)
-    print(cur)
+    return render_template("init.html")
