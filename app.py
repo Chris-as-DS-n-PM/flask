@@ -57,8 +57,8 @@ def init():
     conn.commit()
     cur.close()
     conn.close()
-    conn = "done"
-    return render_template("init.html", conn=conn)
+    result = "done"
+    return render_template("init.html", result=result)
 
 
 # ------- INSERT-------
