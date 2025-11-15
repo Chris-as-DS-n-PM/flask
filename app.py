@@ -37,13 +37,21 @@ def predict():
 
 
 def get_connection():
-    try:
-        url = os.getenv("DATABASE_URL")
-        return psycopg2.connect(url)
-    except ValueError:
-        return "erreur connexion"
-    
+    url = os.getenv("DATABASE_URL")
+    return psycopg2.connect(url)
+
 @app.route("/init")
 def init():
-    conn = "test"
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(200) NOT NULL
+        );
+    """)
+    conn.commit()
+    cur.close()
+    conn.close()
+    conn = "done"
     return render_template("init.html", conn=conn)
