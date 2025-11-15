@@ -48,18 +48,19 @@ def get_connection():
 def init():
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("""
+    try:
+       cur.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             name VARCHAR(200) NOT NULL
         );
-    """)
-    conn.commit()
-    cur.close()
-    conn.close()
-    result = "done"
-    return render_template("init.html", result=result)
-
+        """)
+        conn.commit()
+        cur.close()
+        conn.close()
+        return render_template("init.html", result="table créée")
+    except:
+        return render_template("init.html", result="erreur")
 
 # ------- INSERT-------
 @app.route("/insert")
@@ -67,14 +68,16 @@ def insert():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute(
-    '''INSERT INTO users (name) VALUES \
-    ('chris'), ('Steph'), ('Bernard');''')
-    
-    cur.close()
-    conn.close()
-    result = "done"
-    return render_template("insert.html", result=result)
+    try:
+       cur.execute(
+        '''INSERT INTO users (name) VALUES \
+        ('chris'), ('Steph'), ('Bernard');''')
+        conn.commit()
+        cur.close()
+        conn.close()
+        return render_template("insert.html", result="insertion ok")
+    except:
+        return render_template("insert.html", result="erreur")
 
 
 # ------- READ-------
@@ -83,14 +86,16 @@ def read():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute('''SELECT * FROM users''')
-    # Fetch the data
-    data = cur.fetchall()
+    try:
+        cur.execute('''SELECT * FROM users''')
+        data = cur.fetchall()
+     
+        cur.close()
+        conn.close()
+        return render_template("read.html", data=data)
+    except:
+        return render_template("read.html", result="erreur lecture")
     
-    cur.close()
-    conn.close()
-    result = "done"
-    return render_template("insert.html", data=data)
 
 
 
