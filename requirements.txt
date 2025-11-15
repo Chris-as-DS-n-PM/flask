@@ -5,4 +5,4 @@ pandas
 numpy
 psycopg2-binary
 config
-
+db
