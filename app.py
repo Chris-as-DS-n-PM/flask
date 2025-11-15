@@ -75,3 +75,23 @@ def insert():
     conn.close()
     result = "done"
     return render_template("insert.html", result=result)
+
+
+# ------- READ-------
+@app.route("/read")
+def read():
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute('''SELECT * FROM users''')
+    # Fetch the data
+    data = cur.fetchall()
+    
+    cur.close()
+    conn.close()
+    result = "done"
+    return render_template("insert.html", data=data)
+
+
+
+
