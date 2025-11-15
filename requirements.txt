@@ -1,4 +1,3 @@
-Python==3.12
 Flask
 gunicorn
 requests
